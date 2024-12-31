@@ -1,8 +1,10 @@
 const express = require("express");
 const app = express();
 const tasks = require('./routes/tasks')
+const authRoutes = require("./routes/auth")
 const connectDb = require('./db/connect')
 require('dotenv').config();
+const authenticateJWT = require('./middleware/authenticateJWT');
 const notFound = require('./middleware/Not-found')
 const errorHandlerMiddleWare = require('./middleware/errorHandler')
 
@@ -17,8 +19,14 @@ app.use(errorHandlerMiddleWare)
 
 
 //routes
+app.use('/api/v1/index', authenticateJWT);
+app.use('/api/v1/auth', authRoutes);
 app.use('/api/v1/tasks', tasks)
 app.use(notFound)
+
+app.get('/', (req, res) => {
+  res.sendFile(path.join(__dirname, 'public', 'loginPage.html')); // Adjust the path as needed
+});
 
 
 
