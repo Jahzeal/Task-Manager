@@ -4,25 +4,38 @@ const asyncWrapper = require("../middleware/async");
 const { createCustomError } = require("../errors/custom-error");
 
 const getAllTasks = asyncWrapper(async (req, res) => {
-  const tasks = await Task.find();
-  // res.status(200).json({ tasks });
-  // res.status(200).json({ tasks,amount:tasks.length });
+  const userId = req.user.userId;
+  console.log('grtting',userId);
+  const tasks = await Task.find({ userId }); // Fetch tasks specific to the logged-in user
   res.status(200).json({ tasks, amount: tasks.length });
 });
 
+
 const createTask = asyncWrapper(async (req, res) => {
-  // try {
-  const task = await Task.create(req.body);
-  res.status(201).json(task);
+  const userId = req.user.userId; 
+  if (!req.body.name) {
+    return res.status(400).json({ error: 'Task name is required.' });
+  }
+  const task = await Task.create({ ...req.body, userId });
+  res.status(201).json({ success: true, data: task });
 });
+
+
+
+
 const getTask = asyncWrapper(async (req, res, next) => {
   const { id: taskID } = req.params;
-  const task = await Task.findOne({ _id: taskID });
+  const userId = req.user.userId;
+  console.log('cook',userId);
+
+  const task = await Task.findOne({ _id: taskID, userId }); // Filter by taskID and userId
   if (!task) {
-    return next(createCustomError(`no task with id: ${taskID}`, 404));
+    return next(createCustomError(`No task found for this user with id: ${taskID}`, 404));
   }
+
   res.status(200).json({ task });
 });
+////-----
 
 const updateTask = asyncWrapper(async (req, res) => {
   const { id: taskID } = req.params;
@@ -50,4 +63,7 @@ module.exports = {
   getTask,
   updateTask,
   deleteTask,
+  // deleteUserAccount,
 };
+
+

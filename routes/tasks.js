@@ -1,16 +1,14 @@
-const express = require("express");
+
+const express = require('express');
+const { getAllTasks, createTask, getTask, updateTask, deleteTask } = require('../controllers/tasks');
+const authenticateJWT = require('../middleware/authenticateJWT');
 const router = express.Router();
 
-const { getAllTasks,
-  createTask,
-  getTask,
-  updateTask,
-  deleteTask } = require("../controllers/tasks");
-
-router.route('/').get(getAllTasks).post(createTask)
-router.route('/:id').get(getTask).patch(updateTask).delete(deleteTask)
-
-
-
+// Protect these routes with authenticateJWT middleware
+router.get('/', authenticateJWT, getAllTasks);
+router.post('/', authenticateJWT, createTask);
+router.get('/:id', authenticateJWT, getTask);
+router.put('/:id', authenticateJWT, updateTask);
+router.delete('/:id', authenticateJWT, deleteTask);
 
 module.exports = router;

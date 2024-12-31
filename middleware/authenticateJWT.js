@@ -21,12 +21,13 @@ const authenticateJWT = (req, res, next) => {
 };
 
 // Serve static files (without protection)
-app.use(express.static(path.join(__dirname, 'public'))); // Assuming 'public' folder has your static assets like HTML, CSS, etc.
+app.use(express.static(path.join(__dirname, 'public'))); 
 
 // Route to protect index.html
 app.get('/index.html', authenticateJWT, (req, res) => {
-  res.sendFile(path.join(__dirname, 'public', 'index.html')); // Adjust the path if necessary
+  res.sendFile(path.join(__dirname, 'public', 'index.html'));
 });
 
 
 module.exports = authenticateJWT;
+

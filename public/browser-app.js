@@ -6,10 +6,26 @@ const formAlertDOM = document.querySelector('.form-alert')
 // Load tasks from /api/tasks
 const showTasks = async () => {
   loadingDOM.style.visibility = 'visible'
+  
   try {
+    const token = localStorage.getItem("token");
+
+    if (!token) {
+            setTimeout(() => {   
+        window.location.href = "/loginPage.html"; // Replace with your task manager URL
+      }, 1000);
+    console.log("No token found, please login.");
+    return;
+    }
+    console.log(token);
     const {
       data: { tasks },
-    } = await axios.get('/api/v1/tasks')
+    } = await axios.get('/api/v1/tasks',{
+      headers: {
+        Authorization: `Bearer ${token}`, // Token sent in the request header
+      },
+    })
+    
     if (tasks.length < 1) {
       tasksDOM.innerHTML = '<h5 class="empty-list">No tasks in your list</h5>'
       loadingDOM.style.visibility = 'hidden'
@@ -38,6 +54,7 @@ const showTasks = async () => {
       .join('')
     tasksDOM.innerHTML = allTasks
   } catch (error) {
+    console.error(error);
     tasksDOM.innerHTML =
       '<h5 class="empty-list">There was an error, please try later....</h5>'
   }
@@ -54,7 +71,24 @@ tasksDOM.addEventListener('click', async (e) => {
     loadingDOM.style.visibility = 'visible'
     const id = el.parentElement.dataset.id
     try {
-      await axios.delete(`/api/v1/tasks/${id}`)
+      const token = localStorage.getItem("token");
+
+      if (!token) {
+        etTimeout(() => {   
+          window.location.href = "/loginPage.html"; // Replace with your task manager URL
+        }, 1000)
+    console.log("No token found, please login.");
+    return;
+    }
+    console.log(token);
+      await axios.delete(`/api/v1/tasks/${id}`,
+        {
+          headers: {
+            Authorization: `Bearer ${token}`, // Token sent in the request header
+          },
+        }
+      )
+
       showTasks()
     } catch (error) {
       console.log(error)
@@ -70,7 +104,22 @@ formDOM.addEventListener('submit', async (e) => {
   const name = taskInputDOM.value
 
   try {
-    await axios.post('/api/v1/tasks', { name })
+    const token = localStorage.getItem("token");
+
+    if (!token) {
+      etTimeout(() => {   
+        window.location.href = "/loginPage.html"; // Replace with your task manager URL
+      }, 1000)
+    console.log("No token found, please login.");
+    return;
+    }
+    console.log(token);
+    
+    await axios.post('/api/v1/tasks', { name },    {
+      headers: {
+        Authorization: `Bearer ${token}`, // Token sent in the request header
+      },
+    })
     showTasks()
     taskInputDOM.value = ''
     formAlertDOM.style.display = 'block'

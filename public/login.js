@@ -52,7 +52,7 @@ formDOM.addEventListener("submit", async (e) => {
 
       // Redirect to task manager page after a short delay
       setTimeout(() => {
-        window.location.href = "/index.html"; // Replace with your task manager URL
+        window.location.href = "/index.html"; 
       }, 2000);
     } catch (error) {
       formAlertDOM.style.display = "block";
@@ -82,7 +82,7 @@ formDOM.addEventListener("submit", async (e) => {
 
       // Redirect to task manager page after a short delay
       setTimeout(() => {
-        window.location.href = "/index.html"; // Replace with your task manager URL
+        window.location.href = "/index.html"; 
       }, 2000);
     } catch (error) {
       formAlertDOM.style.display = "block";
@@ -111,7 +111,7 @@ const getProtectedData = async () => {
       },
     });
 
-    console.log(response.data); // Process the response
+    console.log(response.data); 
   } catch (error) {
     console.error(
       "Error fetching tasks:",
@@ -121,12 +121,3 @@ const getProtectedData = async () => {
 };
 
 getProtectedData();
-
-
-
-
-
-
-
-
-

@@ -36,7 +36,7 @@ router.post("/register", async (req, res) => {
     
 
     // Generate a token for the new user (optional)
-    const token = jwt.sign({ userId: newUser._id }, process.env.JWT_SECRET, { expiresIn: "1d" });
+    const token = jwt.sign({ userId: newUser._id }, process.env.JWT_SECRET, { expiresIn: "1m" });
 
     
     res.status(201).json({
@@ -51,43 +51,14 @@ router.post("/register", async (req, res) => {
 
 
 
+
+
+
     
 
 
 
 
-// Login Route
-// router.post("/login", async (req, res) => {
-//   try {
-//     const { username, password } = req.body;
-
-//     if (!username || !password) {
-//       return res.status(400).json({ msg: "Please provide username and password" });
-//     }
-
-
-//     // Check if the user exists
-//     const user = await NewUser.findOne({ username });
-//     if (!user) {
-//       return res.status(401).json({ msg: "Invalid credentials" });
-//     }
-
-//     // Validate password
-//     const isPasswordValid = await bcrypt.compare(password, user.password);
-//     if (!isPasswordValid) {
-//       return res.status(401).json({ msg: "Invalid credentials" });
-//     }
-
-//     // Generate a token
-//     const token = jwt.sign({ userId: user._id }, process.env.JWT_SECRET, { expiresIn: "1d" });
-
-//     res.status(200).json({ msg: "Login successful", token });
-//   } catch (err) {
-//     res.status(500).json({ msg: "Error logging in user" });
-//   }
-// });
-
-// module.exports = router;
 
 
 
@@ -116,7 +87,7 @@ router.post("/login", async (req, res) => {
     const token = jwt.sign(
       { userId: user._id },
       process.env.JWT_SECRET,
-      { expiresIn: "1d" }
+      { expiresIn: "1m" }
     );
 
     res.status(200).json({ msg: "Login successful", token });
