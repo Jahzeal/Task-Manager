@@ -5,7 +5,8 @@ const { createCustomError } = require("../errors/custom-error");
 
 const getAllTasks = asyncWrapper(async (req, res) => {
   const userId = req.user.userId;
-  console.log('grtting',userId);
+  console.log(req.user);
+  console.log('getting',userId);
   const tasks = await Task.find({ userId }); // Fetch tasks specific to the logged-in user
   res.status(200).json({ tasks, amount: tasks.length });
 });
@@ -38,16 +39,21 @@ const getTask = asyncWrapper(async (req, res, next) => {
 ////-----
 
 const updateTask = asyncWrapper(async (req, res) => {
-  const { id: taskID } = req.params;
-  const task = await Task.findOneAndUpdate({ _id: taskID }, req.body, {
-    new: true,
-    runValidators: true,
-  });
-  if (!task) {
-    return next(createCustomError(`no task with id: ${taskID}`, 404));
+  try {
+    const { id: taskID } = req.params;
+    const task = await Task.findOneAndUpdate({ _id: taskID }, req.body, {
+      new: true,
+      runValidators: true,
+    });
+    if (!task) {
+      return next(createCustomError(`no task with id: ${taskID}`, 404));
+    }
+    res.status(200).json({ task });
+  } catch (error) {
+    console.log(error);
   }
-  res.status(200).json({ task });
 });
+
 const deleteTask = asyncWrapper(async (req, res) => {
   const { id: taskID } = req.params;
   const task = await Task.findOneAndDelete({ _id: taskID });

@@ -20,7 +20,8 @@ app.use(errorHandlerMiddleWare)
 
 
 //routes
-app.use('/api/v1/index', authenticateJWT);
+// app.use('/api/v1/index', authenticateJWT);
+app.use('/api/v1/homePage',authenticateJWT)
 app.use('/api/v1/auth', authRoutes);
 app.use('/api/v1/tasks', tasks)
 app.use(notFound)

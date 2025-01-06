@@ -172,7 +172,15 @@ button.block {
 /*************
      FORM 
 *************/
+.single-task-form{
+  display: block;
+}
 form {
+  display: none;
+  z-index: 1; /* Sit on top */
+  left: 50rem;
+  top: 10rem;
+  position: fixed;
   width: 100%;
   background: var(--white);
   border-radius: var(--borderRadius);
@@ -214,6 +222,8 @@ textarea {
 
 .task-form,
 .single-task-form {
+  border-radius: 20px ;
+  height: 20rem;
   width: 90vw;
   max-width: var(--fixed-width);
   margin: 0 auto;
@@ -226,7 +236,10 @@ textarea {
   margin-top: 1rem;
 }
 .submit-btn {
-  width: 100%;
+  
+  margin-left: 8rem;
+  height: 3rem;
+  width: 10rem;
   margin-top: 1rem;
 }
 @media screen and (min-width: 576px) {
@@ -234,11 +247,13 @@ textarea {
     display: flex;
   }
   .task-input {
+    height: 50px;
     border-radius: 0;
     border-top-left-radius: var(--borderRadius);
     border-bottom-left-radius: var(--borderRadius);
   }
   .submit-btn {
+    border-radius: 30px;
     margin-top: 0;
     width: 175px;
     border-radius: 0;
@@ -322,9 +337,19 @@ form > :last-child {
   animation: spinner 0.6s linear infinite;
 }
 
+
+
+
 /*************
      TASKS
 *************/
+
+.form-control{
+  display: grid;
+  gap: 30px;
+
+}
+/* 
 .empty-list {
   text-align: center;
 }
@@ -376,8 +401,8 @@ form > :last-child {
 }
 .loading-text {
   visibility: hidden;
-}
-/* Task Links */
+} */
+/* Task Links
 .task-links {
   display: flex;
   align-items: center;
@@ -395,12 +420,12 @@ form > :last-child {
 }
 .delete-btn {
   color: var(--red-dark);
-}
+} */
 
 /*************
    SINGLE TASK
 *************/
-
+/* 
 .single-task-form h4 {
   text-align: center;
 }
@@ -443,4 +468,4 @@ form > :last-child {
 .single-task-form .form-alert {
   text-align: center;
   margin-top: 1rem;
-}
+} */

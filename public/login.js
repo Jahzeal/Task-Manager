@@ -52,7 +52,8 @@ formDOM.addEventListener("submit", async (e) => {
 
       // Redirect to task manager page after a short delay
       setTimeout(() => {
-        window.location.href = "/index.html"; 
+        // window.location.href = "/index.html"; 
+        window.location.href = "/homePage.html"
       }, 2000);
     } catch (error) {
       formAlertDOM.style.display = "block";
@@ -82,7 +83,8 @@ formDOM.addEventListener("submit", async (e) => {
 
       // Redirect to task manager page after a short delay
       setTimeout(() => {
-        window.location.href = "/index.html"; 
+        // window.location.href = "/index.html"; 
+        window.location.href = "/homePage.html"
       }, 2000);
     } catch (error) {
       formAlertDOM.style.display = "block";

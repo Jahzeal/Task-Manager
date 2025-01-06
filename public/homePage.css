@@ -1,0 +1,190 @@
+
+body {
+  margin: 0;
+  padding: 0;
+  font-family: Arial, sans-serif;
+}
+
+/* Main container */
+.maindiv {
+  display: flex;
+  min-height: 100vh; /* Full screen height */
+  width: 100%; /* Full width */
+}
+
+/* Sidebar */
+.sidebar {
+  position: fixed;
+  box-sizing: border-box;
+  background-color: rgb(47, 38, 38);
+  width: 250px; 
+  height: 100vh;
+  top: 0;
+  left: 0;
+  padding: 20px;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+}
+
+.sidebar h1 {
+  margin: 0;
+  margin-bottom: 20px;
+  color: white;
+}
+
+.leftBardiv {
+  display: flex;
+  flex-direction: column;
+  gap: 25px;
+}
+
+.link-item {
+  height: 30px;
+  width: 120;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.link-item img {
+  height: 20px;
+  width: 20px;
+}
+
+.link-item a {
+  text-decoration: none;
+  color: white;
+  font-size: 16px;
+  transition: background-color 0.3s ease;
+}
+
+.link-item:hover {
+  background-color: #45a049;
+  padding-left: 10px;
+  height: 30px;
+  width: 120;
+  border-radius: 5px;
+  /* background-color: #efecec; */
+}
+
+/* Content */
+.content {
+  margin-left: 250px;
+  padding: 20px;
+  overflow-y: auto;
+  width: calc(100% - 250px);
+  min-height: 100vh;
+}
+
+/* Search Bar */
+.search-container {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  margin-bottom: 20px;
+}
+
+.search-bar {
+  width: 25rem;
+  padding: 10px;
+  font-size: 16px;
+  border-radius: 5px;
+  border: 1px solid #ccc;
+}
+
+.search-button {
+  padding: 8px 12px;
+  background-color: #4CAF50;
+  color: white;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+}
+
+.search-button:hover {
+  background-color: #45a049;
+}
+
+/* Greeting Section */
+.greetingTag {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.header > button{
+
+  height: 30px;
+  width: 60px;
+  margin-bottom: 20px;
+}
+.newProjectButton > button {
+  height: 40px;
+  width: 100px;
+  border: none;
+  background-color: #4CAF50;
+  color: white;
+  border-radius: 5px;
+}
+
+/* Project Status Section */
+.projectCompletedTab {
+  background-color: rgb(239, 230, 230);
+  padding: 10px 20px;
+  border-radius: 15px;
+  margin-bottom: 20px;
+  display: flex;
+  justify-content: space-between;
+}
+
+/* Table */
+td a{
+  color: black ;
+  text-decoration: none
+}
+.table {
+  width: 100%;
+  border-collapse: collapse;
+  background: white;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  margin-bottom: 20px;
+}
+
+.table th, .table td {
+  text-align: left;
+  padding: 12px;
+  border: 1px solid #ddd;
+}
+
+.table th {
+  background-color: #f4f4f4;
+}
+
+.status {
+  padding: 5px 10px;
+  border-radius: 20px;
+  font-size: 0.9em;
+}
+
+.in-progress {
+  background-color: #d1e7dd;
+  color: #0f5132;
+}
+
+.pending {
+  background-color: #f8d7da;
+  color: #842029;
+}
+
+.completed {
+  background-color: #d1e0f0;
+  color: #0d47a1;
+}
+
+
+
+.welcomeText{
+  margin-left: 30%;
+}
+

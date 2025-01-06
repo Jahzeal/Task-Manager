@@ -1,11 +1,11 @@
-const express = require('express');
-const jwt = require('jsonwebtoken');
-const path = require('path');
+const express = require("express");
+const jwt = require("jsonwebtoken");
+const path = require("path");
 const app = express();
 
 // Middleware to authenticate JWT
 const authenticateJWT = (req, res, next) => {
-  const token = req.header('Authorization')?.replace('Bearer ', '');
+  const token = req.header("Authorization")?.replace("Bearer ", "");
 
   if (!token) {
     return res.status(401).json({ msg: "Unauthorized" }); // No token provided
@@ -21,13 +21,14 @@ const authenticateJWT = (req, res, next) => {
 };
 
 // Serve static files (without protection)
-app.use(express.static(path.join(__dirname, 'public'))); 
+app.use(express.static(path.join(__dirname, "public")));
 
 // Route to protect index.html
-app.get('/index.html', authenticateJWT, (req, res) => {
-  res.sendFile(path.join(__dirname, 'public', 'index.html'));
+// app.get('/index.html', authenticateJWT, (req, res) => {
+//   res.sendFile(path.join(__dirname, 'public', 'index.html'));
+// });
+app.get("/homePage.html", authenticateJWT, (req, res) => {
+  res.sendFile(path.join(__dirname, "public", "homePage.html"));
 });
 
-
 module.exports = authenticateJWT;
-

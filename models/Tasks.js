@@ -23,9 +23,18 @@ const taskSchema = new mongoose.Schema({
     ref: 'User', 
     required: true // Ensure every task is linked to a user
   },
-});
+  deadline: {
+    type: Date,
+    required: [true, 'Deadline is required'],
+    validate: {
+      validator: function (value) {
+        return value >= new Date(); 
+      },
+      message: 'Deadline must be a future date',
+    },
+  },
 
-// Create Models
+});
 const User = mongoose.model('User', userSchema);
 const Task = mongoose.model('Task', taskSchema);
 

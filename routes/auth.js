@@ -5,7 +5,10 @@ const router = express.Router();
 const authenticateJWT = require('../middleware/authenticateJWT');
 const { User, Task } = require('../models/Tasks');
 
-router.get('../index.html', (req, res) => {
+// router.get('../index.html', (req, res) => {
+//   res.send('This is the task manager page');
+// });
+router.get('../homePage.html', (req, res) => {
   res.send('This is the task manager page');
 });
 
@@ -36,7 +39,7 @@ router.post("/register", async (req, res) => {
     
 
     // Generate a token for the new user (optional)
-    const token = jwt.sign({ userId: newUser._id }, process.env.JWT_SECRET, { expiresIn: "1m" });
+    const token = jwt.sign({ userId: newUser._id }, process.env.JWT_SECRET, { expiresIn: "1d" });
 
     
     res.status(201).json({
@@ -87,7 +90,7 @@ router.post("/login", async (req, res) => {
     const token = jwt.sign(
       { userId: user._id },
       process.env.JWT_SECRET,
-      { expiresIn: "1m" }
+      { expiresIn: "1d" }
     );
 
     res.status(200).json({ msg: "Login successful", token });
