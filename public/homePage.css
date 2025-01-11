@@ -3,6 +3,23 @@ body {
   margin: 0;
   padding: 0;
   font-family: Arial, sans-serif;
+
+
+
+
+/*date*/
+.todaysDate{
+  color: white;
+  display: flex;
+  margin-left: 30px;
+  margin-top: 40px; 
+}
+
+/*Task header*/
+.taskHeader{
+  margin-top: 20px;
+  display: flex;
+  justify-content: center;
 }
 
 /* Main container */
@@ -17,7 +34,7 @@ body {
   position: fixed;
   box-sizing: border-box;
   background-color: rgb(47, 38, 38);
-  width: 250px; 
+  width: 400px; 
   height: 100vh;
   top: 0;
   left: 0;
@@ -36,11 +53,12 @@ body {
 .leftBardiv {
   display: flex;
   flex-direction: column;
-  gap: 25px;
+  gap: 50px;
 }
 
 .link-item {
-  height: 30px;
+  margin-top: 30px;
+  height: 60px;
   width: 120;
   display: flex;
   align-items: center;
@@ -48,21 +66,22 @@ body {
 }
 
 .link-item img {
-  height: 20px;
-  width: 20px;
+  height: 30px;
+  width: 35px;
 }
 
 .link-item a {
+  font-family:Arial, Helvetica, sans-serif;
   text-decoration: none;
   color: white;
-  font-size: 16px;
+  font-size: 30px;
   transition: background-color 0.3s ease;
 }
 
 .link-item:hover {
   background-color: #45a049;
   padding-left: 10px;
-  height: 30px;
+  height: 60px;
   width: 120;
   border-radius: 5px;
   /* background-color: #efecec; */
@@ -70,10 +89,11 @@ body {
 
 /* Content */
 .content {
-  margin-left: 250px;
+  
+  margin-left:  400px;
   padding: 20px;
   overflow-y: auto;
-  width: calc(100% - 250px);
+  width: calc(100% - 350px);
   min-height: 100vh;
 }
 
@@ -86,14 +106,17 @@ body {
 }
 
 .search-bar {
-  width: 25rem;
+  height: 50px;
+  width: 30rem;
   padding: 10px;
   font-size: 16px;
   border-radius: 5px;
-  border: 1px solid #ccc;
+  border: 1px solid #a39f9f;
 }
 
 .search-button {
+  width: 45px;
+  height: 50px;
   padding: 8px 12px;
   background-color: #4CAF50;
   color: white;
@@ -107,19 +130,23 @@ body {
 }
 
 /* Greeting Section */
-.greetingTag {
+.greetingTagDiv{
   display: flex;
   justify-content: space-between;
+}
+.greetingTag {
+  padding-bottom: 20px;
+  display: flex;
   align-items: center;
 }
 
-.header > button{
-
-  height: 30px;
-  width: 60px;
-  margin-bottom: 20px;
+/* buttons */
+.buttonDiv{
+    display: flex;
+    justify-content: space-between; 
+    gap: 10px;
 }
-.newProjectButton > button {
+.buttonDiv > button {
   height: 40px;
   width: 100px;
   border: none;
@@ -188,3 +215,32 @@ td a{
   margin-left: 30%;
 }
 
+/* notes style */
+.mainNote{
+  flex-direction: column;
+  display: flex;
+}
+.inputDiv{
+  display: flex;
+  justify-content: center;
+}
+.inputDiv > textarea{
+  height: 23rem;
+  width: 50rem;
+
+
+  background-color: rgb(203, 196, 196);
+}
+.inputDiv > textarea::placeholder{
+  color: black;
+}
+.noteBtn{
+  padding-left: 30px;
+  margin-top: 10px;
+  margin-bottom: 15px;
+}
+.noteBtn,button{
+  height: 28px;
+  width: 70px;
+}
+}

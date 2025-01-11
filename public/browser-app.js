@@ -8,9 +8,73 @@ const but = document.getElementById('newTask')
 const woman = document.getElementById('tolu')
 const submitTask = document.getElementById('submit-id')
 const deadlineDate = document.querySelector('.taskDate')
+let ascertainSpace = true;
+const taskPage = document.querySelector('.mytask')
+const completedElement = document.getElementById('completed')
+const inprogressElement = document.getElementById('inprogress')
+const logoutBtn = document.querySelector('.logOut')
+
+// saveData.addEventListener("click", async () => {
+//   try {
+//     const token = localStorage.getItem("token");
+
+//     if (!token) {
+//       console.log("No token found, please login.");
+//       setTimeout(() => {
+//         window.location.href = "/loginPage.html";
+//       }, 1000);
+//       return;
+//     }
+
+//     // Collect the data to send (example: notes input)
+//     const notesInput = document.querySelector('#notesInput'); // Assume there's an input field with this ID
+//     const notes = notesInput.value;
+
+//     // Send the data to the server
+//     const response = await axios.post(
+//       '/api/v1/tasks',
+//       { notes }, // Payload data
+//       {
+//         headers: {
+//           Authorization: `Bearer ${token}`, // Token sent in the request header
+//         },
+//       }
+//     );
+
+//     console.log('Response from server:', response.data);
+
+//     // Optionally clear the input field after saving
+//     // notesInput.value = '';
+
+//   } catch (error) {
+//     console.error("Error handling the click event:", error);
+//   }
+// });
+
+//logout
+
+logoutBtn.addEventListener("click", async (e) => {
+  localStorage.removeItem("token");
+  window.location.reload();
+})
+
+taskPage.addEventListener('click', async (e) => {
+  ascertainSpace = false
+})
 
 
 
+// token validation
+// const getTokenOrRedirect = () => {
+//   const token = localStorage.getItem("token");
+//   if (!token) {
+//     setTimeout(() => {
+//       window.location.href = "/loginPage.html";
+//     }, 1000);
+//     return null;
+//   }
+//   return token;
+// };
 
 const showTasks = async () => {
   loadingDOM.style.visibility = 'visible';
@@ -35,28 +99,52 @@ const showTasks = async () => {
         Authorization: `Bearer ${token}`, // Token sent in the request header
       },
     });
+    console.log('success');
 
     if (tasks.length < 1) {
       tasksDOM.innerHTML = '<h5 class="empty-list">No tasks in your list</h5>';
       loadingDOM.style.visibility = 'hidden';
       return;
     }
+    const completedTasks = tasks.filter((task) => task.completed === true);
+    const completedTaskCount = completedTasks.length; // Count completed tasks
+    completedElement.innerHTML = `${completedTaskCount} Completed Task(s)`
 
-    // Map over tasks and generate the table rows
-    const allTasks = tasks
+    ///inprogress
+    const incompletedTasks = tasks.filter((task) => task.completed === false);
+    const inprogressTaskCount = incompletedTasks.length;
+    inprogressElement.innerHTML = `${inprogressTaskCount} projects in progress`
+    
+    
+    
+
+    
+    let displayTasks = tasks;
+    if (ascertainSpace) {
+      displayTasks = tasks.slice(0, 3); // Only show the first 3 tasks if `ascertainSpace` is true
+    }
+    console.log('good');
+
+    // Map over filtered tasks and generate the table rows
+    const allTasks = displayTasks
       .map((task) => {
         const { completed, _id: taskID, name, deadline } = task;
+        const dateOnly = deadline ? new Date(deadline).toLocaleDateString('en-CA') : 'N/A';
+        
         return `
           <tr>
             <td>${name}</td>
-            <td>${deadline ? deadline : 'N/A'}</td>
+            <td>${deadline ? dateOnly : 'N/A'}</td>
             <td><span class="status ${completed ? 'completed' : 'in-progress'}">${completed ? 'Completed' : 'In Progress'}</span></td>
-            <td><a href="task.html?id=${taskID}" class="update-link">Update</a></td>
+            <td>
+              <a href="task.html?id=${taskID}" class="update-link">Update</a>
+            </td>
+            <td><button class="delete-btn" id="${taskID}">Delete</button></td>
           </tr>
-        ` ;
+        `;
       })
-      .slice(0, 3)
       .join('');
+
     tasksDOM.innerHTML = `
       <table class="table">
         <thead>
@@ -65,6 +153,7 @@ const showTasks = async () => {
             <th>Deadline</th>
             <th>Status</th>
             <th>Edit</th>
+            <th>Delete Task</th>
           </tr>
         </thead>
         <tbody>
@@ -92,6 +181,7 @@ const showTasks = async () => {
 showTasks();
 
 
+
 but.addEventListener('click', async (e) => {
   try {
     const token = localStorage.getItem("token");
@@ -105,7 +195,11 @@ but.addEventListener('click', async (e) => {
     }
 
     // Make form visible
-    woman.style.display = 'block';
+    if (woman.style.display === 'block') {
+      woman.style.display = 'none'; 
+    } else {
+      woman.style.display = 'block'; // Show the form
+    }
   } catch (error) {
     console.error("Error handling the click event:", error);
   }
@@ -125,40 +219,46 @@ but.addEventListener('click', async (e) => {
 
 // delete task /api/tasks/:id
 
+tasksDOM.addEventListener('click', async (e) => {
+  const el = e.target;
+  
+  // Check if the click is on a delete button
+  if (el.parentElement.classList.contains('delete-btn')) {
+    loadingDOM.style.visibility = 'visible';
+    
+    // Get the task ID from data attribute
+    const id = el.parentElement.dataset.id;
+    console.log('Deleting task with ID:', id);
 
-// tasksDOM.addEventListener('click', async (e) => {
-//   const el = e.target
-//   if (el.parentElement.classList.contains('delete-btn')) {
-//     loadingDOM.style.visibility = 'visible'
-//     const id = el.parentElement.dataset.id
-//     try {
-//       const token = localStorage.getItem("token");
+    try {
+      const token = localStorage.getItem("token");
 
-//       if (!token) {
-//         etTimeout(() => {
-//           window.location.href = "/loginPage.html";
-//         }, 1000)
-//     console.log("No token found, please login.");
-//     return;
-//     }
-//     console.log(token);
-//       await axios.delete(`/api/v1/tasks/${id}`,
-//         {
-//           headers: {
-//             Authorization: `Bearer ${token}`, // Token sent in the request header
-//           },
-//         }
-//       )
+      // If no token is found, redirect to login
+      if (!token) {
+        console.log("No token found, please login.");
+        setTimeout(() => {
+          window.location.href = "/loginPage.html"; // Redirect to login page
+        }, 1000);
+        return;
+      }
 
-//       showTasks()
-//     } catch (error) {
-//       console.log(error)
-//     }
-//   }
-//   loadingDOM.style.visibility = 'hidden'
-// })
+      // Perform the DELETE request to remove the task
+      await axios.delete(`/api/v1/tasks/${id}`, {
+        headers: {
+          Authorization: `Bearer ${token}`, // Token sent in the request header
+        },
+      });
 
-
+      // Re-fetch and display tasks
+      showTasks();
+    } catch (error) {
+      console.error('Error deleting task:', error);
+    } finally {
+      // Ensure loading spinner is hidden regardless of success/failure
+      loadingDOM.style.visibility = 'hidden';
+    }
+  }
+});
 
 
 
@@ -183,14 +283,14 @@ formDOM.addEventListener('submit', async (e) => {
     const token = localStorage.getItem("token");
 
     if (!token) {
-      etTimeout(() => {   
+      setTimeout(() => {   
         window.location.href = "/loginPage.html"; // Replace with your task manager URL
       }, 1000)
     console.log("No token found, please login.");
     return;
     }
     console.log(token);
-    
+
     await axios.post('/api/v1/tasks', taskData,   {
       headers: {
         Authorization: `Bearer ${token}`, // Token sent in the request header
@@ -211,4 +311,5 @@ formDOM.addEventListener('submit', async (e) => {
     formAlertDOM.style.display = 'none'
     formAlertDOM.classList.remove('text-success')
   }, 3000)
-})
+}) 
+

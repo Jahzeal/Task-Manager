@@ -340,6 +340,7 @@ form > :last-child {
 
 
 
+
 /*************
      TASKS
 *************/
@@ -348,6 +349,36 @@ form > :last-child {
   display: grid;
   gap: 30px;
 
+}
+.back-link {
+  display: block;
+  width: 250px;
+  margin: 0 auto;
+  text-align: center;
+  margin-top: 6rem;
+  background: var(--black);
+}
+
+
+/*edit page */
+.single-task-form 
+.form-control {
+  display: grid;
+  grid-template-columns: 150px 1fr;
+  align-items: center;
+  justify-items: start;
+  gap: 0 1rem;
+  margin-bottom: 0.75rem;
+}
+
+/*Delete-button*/
+
+.delete-btn,
+.edit-link {
+  background: transparent;
+  font-size: 0.95rem;
+  border: transparent;
+  cursor: pointer;
 }
 /* 
 .empty-list {
@@ -408,13 +439,6 @@ form > :last-child {
   align-items: center;
   gap: 0 0.5rem;
 }
-.delete-btn,
-.edit-link {
-  background: transparent;
-  font-size: 0.75rem;
-  border: transparent;
-  cursor: pointer;
-}
 .edit-link {
   color: var(--green-dark);
 }
@@ -435,14 +459,7 @@ form > :last-child {
   margin-top: 0;
 }
 
-.single-task-form .form-control {
-  display: grid;
-  grid-template-columns: 150px 1fr;
-  align-items: center;
-  justify-items: start;
-  gap: 0 1rem;
-  margin-bottom: 0.75rem;
-}
+
 
 .single-task-form label {
   margin-bottom: 0;
@@ -452,14 +469,7 @@ form > :last-child {
 .task-edit-completed {
   width: auto;
 }
-.back-link {
-  display: block;
-  width: 250px;
-  margin: 0 auto;
-  text-align: center;
-  margin-top: 6rem;
-  background: var(--black);
-}
+
 .back-link:hover {
   background: var(--black);
   opacity: 0.75;

@@ -12,7 +12,7 @@ const taskSchema = new mongoose.Schema({
     type: String,
     required: [true, 'Must provide a name'],
     trim: true,
-    maxlength: [20, 'Name cannot be more than 20 characters'],
+    maxlength: [100, 'Name cannot be more than 20 characters'],
   },
   completed: {
     type: Boolean,
@@ -33,6 +33,9 @@ const taskSchema = new mongoose.Schema({
       message: 'Deadline must be a future date',
     },
   },
+  notes: {
+    type: String
+  }
 
 });
 const User = mongoose.model('User', userSchema);

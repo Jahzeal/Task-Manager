@@ -10,44 +10,41 @@
   <body>
     <div class="maindiv">
       <div class="sidebar">
-        <h1>Monday</h1>
+        <div class="todaysDate">
+          <!-- date -->
+        </div>
         <div class="leftBardiv">
           <div class="link-item">
             <img src="images/dashboard.jpeg" alt="Dashboard" />
-            <a href="Dashboard.html">Dashboard</a>
-          </div>
-          <div class="link-item">
-            <img src="images/project.png" alt="Projects" />
-            <a href="Projects.html">Projects</a>
+            <a href="homePage.html">Dashboard</a>
           </div>
           <div class="link-item">
             <img src="images/task-manager.jpeg" alt="My Task" />
             <a href="MyTask.html" class="mytask">My Task</a>
           </div>
           <div class="link-item">
-            <img src="images/docu.png" alt="Documents" />
-            <a href="Documents.html">Documents</a>
+            <img src="images/docu.png" alt="Notes" />
+            <a href="notes.html">Notes</a>
           </div>
           <div class="link-item">
             <img src="images/completedTask.png" alt="Completed Task" />
             <a href="CompletedTask.html">Completed Task</a>
           </div>
-          <hr />
-          <div class="clock"></div>
+          <div class="buttonDiv">
+            <button class="logOut">Logout</button>
+          </div>
         </div>
       </div>
       <div class="content">
-        <div class="search-container">
-          <input type="text" class="search-bar" placeholder="Search..." />
-          <button class="search-button">🔍</button>
-        </div>
-        <div class="dateAndTime">
-          <p>Thursday, 20th February</p>
-        </div>
-        <div class="greetingTag">
-          <h1>Good evening</h1>
+        
+        <div class="greetingTagDiv">
+          <h1 class="greetingTag"></h1>
+          <div class="search-container">
+            <input type="text" class="search-bar" placeholder="Search..." />
+            <button class="search-button">🔍</button>
+          </div>
+          </div>
           <div class="newProjectButton">
-            <button id="newTask">New Task</button>
             <form class="task-form" id="tolu">
               <h5 class="welcomeText">Add to Tasks</h5>
               <div class="form-control">
@@ -65,51 +62,21 @@
               <div class="form-alert"></div>
             </form>
           </div>
-        </div>
         <div class="projectCompletedTab">
-          <p id="completed">24 projects completed</p>
-          <p id="inprogress">7 projects in progress</p>
+          <p id="completed"></p>
+          <p id="inprogress"></p>
         </div>
         <div class="container">
           <div class="header">
             <h2>My Projects</h2>
-            <button>See All</button>
+            <div class="buttonDiv">
+              <button id="newTask">New Task</button>
+            </div>
           </div>
           <section class="tasks-container">
             <p class="loading-text">Loading...</p>
             <div class="tasks"></div>
           </section>
-          <!-- <div class="Tasks"></div> -->
-          <!-- <table class="table">
-          <thead>
-            <tr>
-              <th>Task Name</th>
-              <th>Deadline</th>
-              <th>Status</th>
-              <th>Edit</th>
-            </tr>
-          </thead>
-          <tbody>
-            <tr>
-              <td>Help DStudio get more customers</td>
-              <td>Monday, 31</td>
-              <td><span class="status in-progress">In Progress</span></td>
-              <td><a href="#">Update</a></td>
-            </tr>
-            <tr>
-              <td>Plan a trip</td>
-              <td>Friday, 21</td>
-              <td><span class="status pending">Pending</span></td>
-              <td><a href="#">Update</a></td>
-            </tr>
-            <tr>
-              <td>Return a package</td>
-              <td>Thursday, 20</td>
-              <td><span class="status completed">Completed</span></td>
-              <td><a href="#">Update</a></td>
-            </tr>
-          </tbody>
-        </table> -->
           <div id="calendar">
             <!-- Calendar  -->
           </div>

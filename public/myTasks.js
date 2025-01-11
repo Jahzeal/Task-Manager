@@ -34,10 +34,11 @@ const showTasks = async () => {
     const allTasks = tasks
       .map((task) => {
         const { completed, _id: taskID, name, deadline } = task;
+        const dateOnly = deadline ? new Date(deadline).toLocaleDateString('en-CA') : 'N/A';
         return `
           <tr>
             <td>${name}</td>
-            <td>${deadline ? deadline : 'N/A'}</td>
+            <td>${deadline ? dateOnly : 'N/A'}</td>
             <td><span class="status ${completed ? 'completed' : 'in-progress'}">${completed ? 'Completed' : 'In Progress'}</span></td>
             <td><a href="task.html?id=${taskID}" class="update-link">Update</a></td>
           </tr>

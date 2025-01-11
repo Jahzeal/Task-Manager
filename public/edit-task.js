@@ -23,7 +23,7 @@ const showTask = async () => {
       },
     });
 
-    const { _id: taskID, completed, name } = task;
+    const { _id: taskID, completed, name,deadline } = task;
 
     taskIDDOM.textContent = taskID;
     taskNameDOM.value = name;
@@ -78,6 +78,7 @@ editFormDOM.addEventListener('submit', async (e) => {
     formAlertDOM.style.display = 'block';
     formAlertDOM.textContent = `Success, edited task`;
     formAlertDOM.classList.add('text-success');
+    showTask()
   } catch (error) {
     // Handle errors
     console.error('Error:', error);
