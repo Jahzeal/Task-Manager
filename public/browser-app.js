@@ -4,8 +4,8 @@ const formDOM = document.querySelector('.task-form')
 const taskInputDOM = document.querySelector('.task-input')
 const formAlertDOM = document.querySelector('.form-alert')
 const welcomeText = document.querySelector('.welcomeText')
-const but = document.getElementById('newTask')
-const woman = document.getElementById('tolu')
+const SubmitButton = document.getElementById('newTask')
+const TaskFormElement = document.getElementById('taskFormID')
 const submitTask = document.getElementById('submit-id')
 const deadlineDate = document.querySelector('.taskDate')
 let ascertainSpace = true;
@@ -26,8 +26,7 @@ const logoutBtn = document.querySelector('.logOut')
 //       return;
 //     }
 
-//     // Collect the data to send (example: notes input)
-//     const notesInput = document.querySelector('#notesInput'); // Assume there's an input field with this ID
+//     const notesInput = document.querySelector('#notesInput'); 
 //     const notes = notesInput.value;
 
 //     // Send the data to the server
@@ -182,7 +181,8 @@ showTasks();
 
 
 
-but.addEventListener('click', async (e) => {
+SubmitButton.addEventListener('click', async (e) => {
+  e.stopPropagation();
   try {
     const token = localStorage.getItem("token");
 
@@ -195,15 +195,27 @@ but.addEventListener('click', async (e) => {
     }
 
     // Make form visible
-    if (woman.style.display === 'block') {
-      woman.style.display = 'none'; 
+    if (TaskFormElement.style.display === 'block') {
+      TaskFormElement.style.display = 'none'; 
     } else {
-      woman.style.display = 'block'; // Show the form
+      TaskFormElement.style.display = 'block'; // Show the form
     }
   } catch (error) {
     console.error("Error handling the click event:", error);
   }
 });
+
+document.body.addEventListener("click", function () {
+  if (TaskFormElement.style.display == 'block') {
+    TaskFormElement.style.display= 'none'
+  }
+});
+
+TaskFormElement.addEventListener("click", function (event) {  //is prevent bubbling
+  event.stopPropagation();
+});
+
+
 
 
 
@@ -223,11 +235,11 @@ tasksDOM.addEventListener('click', async (e) => {
   const el = e.target;
   
   // Check if the click is on a delete button
-  if (el.parentElement.classList.contains('delete-btn')) {
+  if (el.classList.contains('delete-btn')) {
     loadingDOM.style.visibility = 'visible';
     
     // Get the task ID from data attribute
-    const id = el.parentElement.dataset.id;
+    const id = el.id;
     console.log('Deleting task with ID:', id);
 
     try {
@@ -301,7 +313,7 @@ formDOM.addEventListener('submit', async (e) => {
     formAlertDOM.style.display = 'block'
     formAlertDOM.textContent = `success, task added`
     formAlertDOM.classList.add('text-success')
-    woman.style.display = 'none';
+    TaskFormElement.style.display = 'none';
     showTasks();
   } catch (error) {
     formAlertDOM.style.display = 'block'

@@ -28,8 +28,9 @@ formDOM.addEventListener("submit", async (e) => {
   e.preventDefault(); // Prevent default form submission
   formAlertDOM.classList.remove("text-success", "text-danger");
 
-  const username = usernameInputDOM.value;
+  const convertedUsername = usernameInputDOM.value;
   const password = passwordInputDOM.value;
+  const username = convertedUsername.toLowerCase()
   if (screenStatus) {
     try {
       // Send username and password to the backend to register

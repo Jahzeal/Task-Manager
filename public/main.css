@@ -81,6 +81,7 @@ body {
 p {
   margin-bottom: 1.5rem;
   max-width: 40em;
+  margin: 0;
 }
 
 h1,
@@ -178,8 +179,8 @@ button.block {
 form {
   display: none;
   z-index: 1; /* Sit on top */
-  left: 50rem;
-  top: 10rem;
+  left: 15rem;
+  /* top: 10rem; */
   position: fixed;
   width: 100%;
   background: var(--white);
@@ -220,14 +221,23 @@ textarea {
   text-transform: capitalize;
 }
 
-.task-form,
+
 .single-task-form {
   border-radius: 20px ;
   height: 20rem;
-  width: 90vw;
+  width: 50%;
   max-width: var(--fixed-width);
   margin: 0 auto;
-  margin-top: 6rem;
+  margin-top: 2rem;
+  
+}
+.task-form{
+  border-radius: 20px ;
+  height: 15rem;
+  width: 50%;
+  max-width: var(--fixed-width);
+  margin: 0 auto;
+  /* background-color: #0f5132; */
 }
 .task-form h4 {
   text-align: center;
@@ -236,10 +246,9 @@ textarea {
   margin-top: 1rem;
 }
 .submit-btn {
-  
   margin-left: 8rem;
-  height: 3rem;
-  width: 10rem;
+  height: 40px;
+  width: 8rem;
   margin-top: 1rem;
 }
 @media screen and (min-width: 576px) {
@@ -247,7 +256,7 @@ textarea {
     display: flex;
   }
   .task-input {
-    height: 50px;
+    height: 30px;
     border-radius: 0;
     border-top-left-radius: var(--borderRadius);
     border-bottom-left-radius: var(--borderRadius);
@@ -255,7 +264,7 @@ textarea {
   .submit-btn {
     border-radius: 30px;
     margin-top: 0;
-    width: 175px;
+    width: 130px;
     border-radius: 0;
     border-top-right-radius: var(--borderRadius);
     border-bottom-right-radius: var(--borderRadius);
