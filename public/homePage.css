@@ -147,12 +147,13 @@ body {
 .buttonDiv{
     display: flex;
     margin-top: auto;
-    justify-content: space-between; 
+    justify-content: space-between;
+    gap: 10px;
 
 }
 .buttonDiv > button {
-  height: 40px;
-  width: 100px;
+  height: 30px;
+  width: 70px;
   border: none;
   background-color: #4CAF50;
   color: white;

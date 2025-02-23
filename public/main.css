@@ -179,7 +179,7 @@ button.block {
 form {
   display: none;
   z-index: 1; /* Sit on top */
-  left: 15rem;
+  left: 20rem;
   /* top: 10rem; */
   position: fixed;
   width: 100%;
@@ -224,11 +224,10 @@ textarea {
 
 .single-task-form {
   border-radius: 20px ;
-  height: 20rem;
+  height: 17rem;
   width: 50%;
   max-width: var(--fixed-width);
   margin: 0 auto;
-  margin-top: 2rem;
   
 }
 .task-form{
@@ -370,6 +369,10 @@ form > :last-child {
 
 
 /*edit page */
+
+.single-task-form{
+  display: none;
+}
 .single-task-form 
 .form-control {
   display: grid;
@@ -383,7 +386,8 @@ form > :last-child {
 /*Delete-button*/
 
 .delete-btn,
-.edit-link {
+.edit-link,
+.update-link{
   background: transparent;
   font-size: 0.95rem;
   border: transparent;

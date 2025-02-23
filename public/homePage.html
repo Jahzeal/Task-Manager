@@ -28,10 +28,11 @@
           </div>
           <div class="link-item">
             <img src="images/completedTask.png" alt="Completed Task" />
-            <a href="CompletedTask.html">Completed Task</a>
+            <a href="Team.html">Team Task</a>
           </div>
           <div class="buttonDiv">
             <button class="logOut">Logout</button>
+            <button class="Delete">Delete</button>
           </div>
         </div>
       </div>
@@ -73,6 +74,31 @@
               </div>
               <div class="form-alert"></div>
             </form>
+
+            <!-- new -->
+            <div class="container">
+              <form class="single-task-form">
+                <h4>Edit Task</h4>
+                <div class="form-control">
+                  <label>Task ID</label>
+                  <p class="task-edit-id"></p>
+                </div>
+                <div class="form-control">
+                  <label for="name">Name</label>
+                  <input type="text" name="name" class="task-edit-name" />
+                </div>
+                <div class="form-control">
+                  <label for="name">Deadline</label>
+                  <input type="date" name="Deadline" class="Deadline
+                <div class="form-control">
+                  <label for="completed">completed</label>
+                  <input type="checkbox" name="completed" class="task-edit-completed" />
+                </div>
+                <button type="submit" class="block btn task-edit-btn">edit</button>
+                <div class="form-alert"></div>
+              </form>
+            
+            </div>
           </div>
         <div class="projectCompletedTab">
           <p id="completed"></p>
@@ -104,5 +130,6 @@
     <script src="https://cdn.jsdelivr.net/npm/fullcalendar/index.global.min.js"></script>
     <script src="homepage.js"></script>
     <script src="browser-app.js"></script>
+    <script src="login.js"></script>
   </body>
 </html>

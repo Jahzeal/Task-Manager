@@ -19,7 +19,7 @@ Login.addEventListener("click", (e) => {
   } else {
     LoginHeader.textContent = "Login";
     Login.textContent = "Create New Account";
-    screenStatus = false; 
+    screenStatus = false;
   }
 });
 
@@ -30,7 +30,7 @@ formDOM.addEventListener("submit", async (e) => {
 
   const convertedUsername = usernameInputDOM.value;
   const password = passwordInputDOM.value;
-  const username = convertedUsername.toLowerCase()
+  const username = convertedUsername.toLowerCase();
   if (screenStatus) {
     try {
       // Send username and password to the backend to register
@@ -53,8 +53,8 @@ formDOM.addEventListener("submit", async (e) => {
 
       // Redirect to task manager page after a short delay
       setTimeout(() => {
-        // window.location.href = "/index.html"; 
-        window.location.href = "/homePage.html"
+        // window.location.href = "/index.html";
+        window.location.href = "/homePage.html";
       }, 2000);
     } catch (error) {
       formAlertDOM.style.display = "block";
@@ -84,16 +84,14 @@ formDOM.addEventListener("submit", async (e) => {
 
       // Redirect to task manager page after a short delay
       setTimeout(() => {
-        // window.location.href = "/index.html"; 
-        window.location.href = "/homePage.html"
+        // window.location.href = "/index.html";
+        window.location.href = "/homePage.html";
       }, 2000);
     } catch (error) {
       formAlertDOM.style.display = "block";
-      formAlertDOM.textContent =
-        error.response?.data?.msg || "Not Found!";
+      formAlertDOM.textContent = error.response?.data?.msg || "Not Found!";
       formAlertDOM.classList.add("text-danger");
     }
-    
   }
 });
 
@@ -114,7 +112,7 @@ const getProtectedData = async () => {
       },
     });
 
-    console.log(response.data); 
+    console.log(response.data);
   } catch (error) {
     console.error(
       "Error fetching tasks:",

@@ -41,7 +41,7 @@ const getTime = () => {
   const period = hours >= 12 ? "PM" : "AM";
   hours = hours % 12;
   hours = hours ? hours : 12;
-  if (period == "AM") {
+  if (period === "AM") {
     greeting.innerHTML = "Good Morning";
   }
   greeting.innerHTML = "Good Evening";
@@ -50,18 +50,19 @@ const getTime = () => {
 getTime();
 searchButtonFunc.addEventListener("click", async (e) => {
   e.stopPropagation();
+
   try {
     const token = localStorage.getItem("token");
+    if (!token) throw new Error("No token found");
+
     const response = await axios.get("/api/v1/tasks", {
       headers: { Authorization: `Bearer ${token}` },
     });
 
     const tasks = response.data.tasks;
-    const searchQuery = searchBarFunc.value.trim();
+    const searchQuery = searchBarFunc.value.trim().toLowerCase();
 
-    const foundTask = tasks.find(
-      (task) => task.name.toLowerCase() === searchQuery.toLowerCase()
-    );
+    const foundTask = tasks.find((task) => task.name.toLowerCase() === searchQuery);
 
     if (foundTask) {
       const { completed, name, deadline } = foundTask;
@@ -74,29 +75,26 @@ searchButtonFunc.addEventListener("click", async (e) => {
           <td>${completed ? "✅ Yes" : "❌ No"}</td>
         </tr>
       `;
-      if (taskTablefunc.style.display === "block") {
-        taskTablefunc.style.display = "none";
-      } else {
-        taskTablefunc.style.display = "block";
-      }
-
-      document.body.addEventListener("click", function () {
-        if (taskTablefunc.style.display == "block") {
-          taskTablefunc.style.display = "none";
-        }
-      });
-
-      taskTablefunc.addEventListener("click", function (event) {
-        //is preventing bubbling
-        event.stopPropagation();
-      });
+      taskTablefunc.style.display = "block";
     } else {
-      gottenfunc.innerHTML = "<tr><td colspan='4'>Task not found</td></tr>";
-      document.querySelector(".task-table").style.display = "block";
+      gottenfunc.innerHTML = "<tr><td colspan='3'>Task not found</td></tr>";
+      taskTablefunc.style.display = "block";
     }
 
-    console.log("success");
+    console.log("Search completed successfully");
   } catch (error) {
     console.error("Error fetching tasks:", error);
   }
+});
+
+// Ensure body click listener is added only once
+document.body.addEventListener("click", (event) => {
+  if (!taskTablefunc.contains(event.target)) {
+    taskTablefunc.style.display = "none";
+  }
+});
+
+// Prevent click event from bubbling when clicking inside the table
+taskTablefunc.addEventListener("click", (event) => {
+  event.stopPropagation();
 });
